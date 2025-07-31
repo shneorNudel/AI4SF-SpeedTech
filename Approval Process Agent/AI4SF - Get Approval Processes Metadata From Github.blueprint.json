@@ -1,0 +1,857 @@
+{
+    "name": "AI4SF - Get Approval Processes Metadata From Github",
+    "flow": [
+        {
+            "id": 1,
+            "module": "http:ActionSendData",
+            "version": 3,
+            "parameters": {
+                "handleErrors": true,
+                "useNewZLibDeCompress": true
+            },
+            "mapper": {
+                "ca": "",
+                "qs": [],
+                "url": "https://api.github.com/repos/...YOUR_REPO..../",
+                "gzip": true,
+                "method": "get",
+                "headers": [
+                    {
+                        "name": "Authorization",
+                        "value": "Bearer <your token>"
+                    },
+                    {
+                        "name": "Accept",
+                        "value": "application/vnd.github.v3+json"
+                    }
+                ],
+                "timeout": "",
+                "useMtls": false,
+                "authPass": "",
+                "authUser": "",
+                "bodyType": "",
+                "serializeUrl": false,
+                "shareCookies": false,
+                "parseResponse": true,
+                "followRedirect": true,
+                "useQuerystring": false,
+                "followAllRedirects": false,
+                "rejectUnauthorized": true
+            },
+            "metadata": {
+                "designer": {
+                    "x": -437,
+                    "y": -5,
+                    "name": "Retrieve Metadata from GitHub"
+                },
+                "restore": {
+                    "expect": {
+                        "qs": {
+                            "mode": "chose"
+                        },
+                        "method": {
+                            "mode": "chose",
+                            "label": "GET"
+                        },
+                        "headers": {
+                            "mode": "chose",
+                            "items": [
+                                null,
+                                null
+                            ]
+                        },
+                        "bodyType": {
+                            "label": "Empty"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "handleErrors",
+                        "type": "boolean",
+                        "label": "Evaluate all states as errors (except for 2xx and 3xx )",
+                        "required": true
+                    },
+                    {
+                        "name": "useNewZLibDeCompress",
+                        "type": "hidden"
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "url",
+                        "type": "url",
+                        "label": "URL",
+                        "required": true
+                    },
+                    {
+                        "name": "serializeUrl",
+                        "type": "boolean",
+                        "label": "Serialize URL",
+                        "required": true
+                    },
+                    {
+                        "name": "method",
+                        "type": "select",
+                        "label": "Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "get",
+                                "head",
+                                "post",
+                                "put",
+                                "patch",
+                                "delete",
+                                "options"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "headers",
+                        "spec": [
+                            {
+                                "name": "name",
+                                "type": "text",
+                                "label": "Name",
+                                "required": true
+                            },
+                            {
+                                "name": "value",
+                                "type": "text",
+                                "label": "Value"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Headers"
+                    },
+                    {
+                        "name": "qs",
+                        "spec": [
+                            {
+                                "name": "name",
+                                "type": "text",
+                                "label": "Name",
+                                "required": true
+                            },
+                            {
+                                "name": "value",
+                                "type": "text",
+                                "label": "Value"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Query String"
+                    },
+                    {
+                        "name": "bodyType",
+                        "type": "select",
+                        "label": "Body type",
+                        "validate": {
+                            "enum": [
+                                "raw",
+                                "x_www_form_urlencoded",
+                                "multipart_form_data"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "parseResponse",
+                        "type": "boolean",
+                        "label": "Parse response",
+                        "required": true
+                    },
+                    {
+                        "name": "authUser",
+                        "type": "text",
+                        "label": "User name"
+                    },
+                    {
+                        "name": "authPass",
+                        "type": "password",
+                        "label": "Password"
+                    },
+                    {
+                        "name": "timeout",
+                        "type": "uinteger",
+                        "label": "Timeout",
+                        "validate": {
+                            "max": 300,
+                            "min": 1
+                        }
+                    },
+                    {
+                        "name": "shareCookies",
+                        "type": "boolean",
+                        "label": "Share cookies with other HTTP modules",
+                        "required": true
+                    },
+                    {
+                        "name": "ca",
+                        "type": "cert",
+                        "label": "Self-signed certificate"
+                    },
+                    {
+                        "name": "rejectUnauthorized",
+                        "type": "boolean",
+                        "label": "Reject connections that are using unverified (self-signed) certificates",
+                        "required": true
+                    },
+                    {
+                        "name": "followRedirect",
+                        "type": "boolean",
+                        "label": "Follow redirect",
+                        "required": true
+                    },
+                    {
+                        "name": "useQuerystring",
+                        "type": "boolean",
+                        "label": "Disable serialization of multiple same query string keys as arrays",
+                        "required": true
+                    },
+                    {
+                        "name": "gzip",
+                        "type": "boolean",
+                        "label": "Request compressed content",
+                        "required": true
+                    },
+                    {
+                        "name": "useMtls",
+                        "type": "boolean",
+                        "label": "Use Mutual TLS",
+                        "required": true
+                    },
+                    {
+                        "name": "followAllRedirects",
+                        "type": "boolean",
+                        "label": "Follow all redirect",
+                        "required": true
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "headers",
+                        "spec": [
+                            {
+                                "name": "name",
+                                "type": "text",
+                                "label": "Name"
+                            },
+                            {
+                                "name": "value",
+                                "type": "text",
+                                "label": "Value"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Headers"
+                    },
+                    {
+                        "name": "cookieHeaders",
+                        "type": "array",
+                        "label": "Cookie headers"
+                    },
+                    {
+                        "name": "statusCode",
+                        "type": "number",
+                        "label": "Status code"
+                    },
+                    {
+                        "name": "data",
+                        "type": "any",
+                        "label": "Data"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 2,
+            "module": "builtin:BasicFeeder",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "array": "{{1.data}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": -108,
+                    "y": -4
+                },
+                "restore": {
+                    "expect": {
+                        "array": {
+                            "mode": "edit"
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "mode": "edit",
+                        "name": "array",
+                        "spec": [],
+                        "type": "array",
+                        "label": "Array"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 3,
+            "module": "http:ActionSendData",
+            "version": 3,
+            "parameters": {
+                "handleErrors": true,
+                "useNewZLibDeCompress": true
+            },
+            "filter": {
+                "name": "pass only 3 process for testing",
+                "conditions": []
+            },
+            "mapper": {
+                "ca": "",
+                "qs": [],
+                "url": "https://api.github.com/repos/...YOUR_REPO_FOLDER_WITH_THE_FILES.../{{2.path}}?ref=main",
+                "gzip": true,
+                "method": "get",
+                "headers": [
+                    {
+                        "name": "Authorization",
+                        "value": "Bearer <your token>"
+                    },
+                    {
+                        "name": "Accept",
+                        "value": "application/vnd.github.v3+json"
+                    }
+                ],
+                "timeout": "",
+                "useMtls": false,
+                "authPass": "",
+                "authUser": "",
+                "bodyType": "",
+                "serializeUrl": false,
+                "shareCookies": false,
+                "parseResponse": true,
+                "followRedirect": true,
+                "useQuerystring": false,
+                "followAllRedirects": false,
+                "rejectUnauthorized": true
+            },
+            "metadata": {
+                "designer": {
+                    "x": 228,
+                    "y": -2,
+                    "name": "Retrieve Metadata from GitHub Level 5"
+                },
+                "restore": {
+                    "expect": {
+                        "qs": {
+                            "mode": "chose"
+                        },
+                        "method": {
+                            "mode": "chose",
+                            "label": "GET"
+                        },
+                        "headers": {
+                            "mode": "chose",
+                            "items": [
+                                null,
+                                null
+                            ]
+                        },
+                        "bodyType": {
+                            "label": "Empty"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "handleErrors",
+                        "type": "boolean",
+                        "label": "Evaluate all states as errors (except for 2xx and 3xx )",
+                        "required": true
+                    },
+                    {
+                        "name": "useNewZLibDeCompress",
+                        "type": "hidden"
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "url",
+                        "type": "url",
+                        "label": "URL",
+                        "required": true
+                    },
+                    {
+                        "name": "serializeUrl",
+                        "type": "boolean",
+                        "label": "Serialize URL",
+                        "required": true
+                    },
+                    {
+                        "name": "method",
+                        "type": "select",
+                        "label": "Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "get",
+                                "head",
+                                "post",
+                                "put",
+                                "patch",
+                                "delete",
+                                "options"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "headers",
+                        "spec": [
+                            {
+                                "name": "name",
+                                "type": "text",
+                                "label": "Name",
+                                "required": true
+                            },
+                            {
+                                "name": "value",
+                                "type": "text",
+                                "label": "Value"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Headers"
+                    },
+                    {
+                        "name": "qs",
+                        "spec": [
+                            {
+                                "name": "name",
+                                "type": "text",
+                                "label": "Name",
+                                "required": true
+                            },
+                            {
+                                "name": "value",
+                                "type": "text",
+                                "label": "Value"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Query String"
+                    },
+                    {
+                        "name": "bodyType",
+                        "type": "select",
+                        "label": "Body type",
+                        "validate": {
+                            "enum": [
+                                "raw",
+                                "x_www_form_urlencoded",
+                                "multipart_form_data"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "parseResponse",
+                        "type": "boolean",
+                        "label": "Parse response",
+                        "required": true
+                    },
+                    {
+                        "name": "authUser",
+                        "type": "text",
+                        "label": "User name"
+                    },
+                    {
+                        "name": "authPass",
+                        "type": "password",
+                        "label": "Password"
+                    },
+                    {
+                        "name": "timeout",
+                        "type": "uinteger",
+                        "label": "Timeout",
+                        "validate": {
+                            "max": 300,
+                            "min": 1
+                        }
+                    },
+                    {
+                        "name": "shareCookies",
+                        "type": "boolean",
+                        "label": "Share cookies with other HTTP modules",
+                        "required": true
+                    },
+                    {
+                        "name": "ca",
+                        "type": "cert",
+                        "label": "Self-signed certificate"
+                    },
+                    {
+                        "name": "rejectUnauthorized",
+                        "type": "boolean",
+                        "label": "Reject connections that are using unverified (self-signed) certificates",
+                        "required": true
+                    },
+                    {
+                        "name": "followRedirect",
+                        "type": "boolean",
+                        "label": "Follow redirect",
+                        "required": true
+                    },
+                    {
+                        "name": "useQuerystring",
+                        "type": "boolean",
+                        "label": "Disable serialization of multiple same query string keys as arrays",
+                        "required": true
+                    },
+                    {
+                        "name": "gzip",
+                        "type": "boolean",
+                        "label": "Request compressed content",
+                        "required": true
+                    },
+                    {
+                        "name": "useMtls",
+                        "type": "boolean",
+                        "label": "Use Mutual TLS",
+                        "required": true
+                    },
+                    {
+                        "name": "followAllRedirects",
+                        "type": "boolean",
+                        "label": "Follow all redirect",
+                        "required": true
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "headers",
+                        "spec": [
+                            {
+                                "name": "name",
+                                "type": "text",
+                                "label": "Name"
+                            },
+                            {
+                                "name": "value",
+                                "type": "text",
+                                "label": "Value"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Headers"
+                    },
+                    {
+                        "name": "cookieHeaders",
+                        "type": "array",
+                        "label": "Cookie headers"
+                    },
+                    {
+                        "name": "statusCode",
+                        "type": "number",
+                        "label": "Status code"
+                    },
+                    {
+                        "name": "data",
+                        "type": "any",
+                        "label": "Data"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 6,
+            "module": "xml:ParseXML",
+            "version": 1,
+            "parameters": {
+                "type": "",
+                "preserveNumbersAsText": false
+            },
+            "mapper": {
+                "xml": "{{trim(toString(toBinary(3.data.content; \"base64\")))}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 573,
+                    "y": -3
+                },
+                "restore": {
+                    "parameters": {
+                        "type": {
+                            "label": "Choose a data structure"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "type",
+                        "type": "udt",
+                        "label": "Data structure"
+                    },
+                    {
+                        "name": "preserveNumbersAsText",
+                        "type": "boolean",
+                        "label": "Preserve numbers as text",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "xml",
+                        "type": "text",
+                        "label": "XML",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 14,
+            "module": "google-bigquery:createRow",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": 73917
+            },
+            "mapper": {
+                "row": {
+                    "label": "{{6.ApprovalProcess.label}}",
+                    "Object": "{{extractObject(3.data.name)}}",
+                    "active": "{{6.ApprovalProcess.active}}",
+                    "Full XML": "{{6.ApprovalProcess}}",
+                    "allowRecall": "{{6.ApprovalProcess.allowRecall}}",
+                    "description": "{{6.ApprovalProcess.description}}",
+                    "approvalStep": "{{6.ApprovalProcess.approvalStep}}",
+                    "listOfFields": "{{toString(join(map(6.ApprovalProcess.approvalPageFields; \"field\"); map(6.ApprovalProcess.approvalStep[].approvalActions[].action; \"name\"); map(6.ApprovalProcess.approvalStep[].entryCriteria; \"formula\"); map(6.ApprovalProcess.approvalStep[].entryCriteria[].criteriaItems; \"field\"); map(6.ApprovalProcess.approvalStep[].entryCriteria[].criteriaItems; \"value\"); map(6.ApprovalProcess.entryCriteria[].criteriaItems; \"field\"); map(6.ApprovalProcess.entryCriteria[].criteriaItems; \"value\"); map(6.ApprovalProcess.finalApprovalActions[].action; \"name\"); map(6.ApprovalProcess.finalApprovalActions[].action; \"name\"); map(6.ApprovalProcess.initialSubmissionActions[].action; \"name\"); map(6.ApprovalProcess.recallActions[].action; \"name\"); ))}}",
+                    "processOrder": "{{6.ApprovalProcess.processOrder}}",
+                    "entryCriteria": "{{6.ApprovalProcess.entryCriteria}}",
+                    "recallActions": "{{6.ApprovalProcess.recallActions}}",
+                    "allowedSubmitters": "{{6.ApprovalProcess.allowedSubmitters}}",
+                    "recordEditability": "{{6.ApprovalProcess.recordEditability}}",
+                    "approvalPageFields": "{{6.ApprovalProcess.approvalPageFields}}",
+                    "showApprovalHistory": "{{6.ApprovalProcess.showApprovalHistory}}",
+                    "finalApprovalActions": "{{6.ApprovalProcess.finalApprovalActions}}",
+                    "finalRejectionActions": "{{6.ApprovalProcess.finalRejectionActions}}",
+                    "finalApprovalRecordLock": "{{6.ApprovalProcess.finalApprovalRecordLock}}",
+                    "enableMobileDeviceAccess": "{{6.ApprovalProcess.enableMobileDeviceAccess}}",
+                    "finalRejectionRecordLock": "{{6.ApprovalProcess.finalRejectionRecordLock}}",
+                    "initialSubmissionActions": "{{6.ApprovalProcess.initialSubmissionActions}}",
+                    "approvalStep_entryCriteria": "{{6.ApprovalProcess.approvalStep[].entryCriteria}}",
+                    "entryCriteria_criteriaItems": "{{6.ApprovalProcess.entryCriteria[].criteriaItems[]}}",
+                    "approvalStep_approvalActions": "{{6.ApprovalProcess.approvalStep[].approvalActions}}",
+                    "approvalStep_assignedApprover": "{{6.ApprovalProcess.approvalStep[].assignedApprover}}",
+                    "approvalStep_entryCriteria_criteriaItems": "{{6.ApprovalProcess.approvalStep[].entryCriteria[].criteriaItems[]}}"
+                },
+                "table": "<your table name>",
+                "select": "list",
+                "dataset": "<your dataset>",
+                "project": "<your project>"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 927,
+                    "y": 3
+                },
+                "restore": {
+                    "expect": {
+                        "table": {
+                            "label": "<your table name>"
+                        },
+                        "select": {
+                            "label": "Select from the list"
+                        },
+                        "dataset": {
+                            "label": "<your dataset>"
+                        },
+                        "project": {
+                            "label": "<your project>"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google"
+                            },
+                            "label": "BigQuerry connection"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:google",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "select",
+                        "type": "select",
+                        "label": "Choose a Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "map",
+                                "list"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "project",
+                        "type": "select",
+                        "label": "Project ID",
+                        "required": true
+                    },
+                    {
+                        "name": "dataset",
+                        "type": "select",
+                        "label": "Dataset ID",
+                        "required": true
+                    },
+                    {
+                        "name": "table",
+                        "type": "select",
+                        "label": "Table ID",
+                        "required": true
+                    },
+                    {
+                        "name": "row",
+                        "spec": [
+                            {
+                                "name": "Full XML",
+                                "type": "text"
+                            },
+                            {
+                                "name": "Object",
+                                "type": "text"
+                            },
+                            {
+                                "name": "active",
+                                "type": "text"
+                            },
+                            {
+                                "name": "allowRecall",
+                                "type": "text"
+                            },
+                            {
+                                "name": "allowedSubmitters",
+                                "type": "text"
+                            },
+                            {
+                                "name": "approvalPageFields",
+                                "type": "text"
+                            },
+                            {
+                                "name": "approvalStep",
+                                "type": "text"
+                            },
+                            {
+                                "name": "approvalStep_approvalActions",
+                                "type": "text"
+                            },
+                            {
+                                "name": "approvalStep_assignedApprover",
+                                "type": "text"
+                            },
+                            {
+                                "name": "approvalStep_entryCriteria",
+                                "type": "text"
+                            },
+                            {
+                                "name": "approvalStep_entryCriteria_criteriaItems",
+                                "type": "text"
+                            },
+                            {
+                                "name": "enableMobileDeviceAccess",
+                                "type": "text"
+                            },
+                            {
+                                "name": "entryCriteria",
+                                "type": "text"
+                            },
+                            {
+                                "name": "entryCriteria_criteriaItems",
+                                "type": "text"
+                            },
+                            {
+                                "name": "finalApprovalActions",
+                                "type": "text"
+                            },
+                            {
+                                "name": "finalApprovalRecordLock",
+                                "type": "text"
+                            },
+                            {
+                                "name": "finalRejectionActions",
+                                "type": "text"
+                            },
+                            {
+                                "name": "finalRejectionRecordLock",
+                                "type": "text"
+                            },
+                            {
+                                "name": "initialSubmissionActions",
+                                "type": "text"
+                            },
+                            {
+                                "name": "label",
+                                "type": "text"
+                            },
+                            {
+                                "name": "processOrder",
+                                "type": "text"
+                            },
+                            {
+                                "name": "recallActions",
+                                "type": "text"
+                            },
+                            {
+                                "name": "recordEditability",
+                                "type": "text"
+                            },
+                            {
+                                "name": "showApprovalHistory",
+                                "type": "text"
+                            },
+                            {
+                                "name": "listOfFields",
+                                "type": "text"
+                            },
+                            {
+                                "name": "description",
+                                "type": "text"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Values of Row"
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "instant": false,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu1.make.celonis.com",
+        "notes": []
+    }
+}

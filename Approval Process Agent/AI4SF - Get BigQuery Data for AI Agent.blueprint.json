@@ -1,0 +1,430 @@
+{
+    "name": "AI4SF - Get BigQuery Data for AI Agent",
+    "flow": [
+        {
+            "id": 3,
+            "module": "google-bigquery:writeQuery",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": 73917
+            },
+            "mapper": {
+                "query": "{{var.input.SOQLQuery}}",
+                "table": "approval_processes",
+                "dryRun": false,
+                "prefix": "#standardSQL",
+                "project": "speedtech-project",
+                "datasetId": "AI4SF_DataSet",
+                "useQueryCache": true,
+                "useInt64Timestamp": false
+            },
+            "metadata": {
+                "designer": {
+                    "x": 18,
+                    "y": -39
+                },
+                "restore": {
+                    "expect": {
+                        "table": {
+                            "mode": "chose",
+                            "label": "approval_processes"
+                        },
+                        "dryRun": {
+                            "mode": "chose"
+                        },
+                        "prefix": {
+                            "mode": "chose",
+                            "label": "Runs the query using standard SQL"
+                        },
+                        "project": {
+                            "mode": "chose",
+                            "label": "Speedtech-Project",
+                            "nested": [
+                                {
+                                    "help": "Specifies the **Default Dataset** to assume for any table in **Query** field. If not set, you must specify a table in the format `{datasetId}.{tableId}` in **Query** field.",
+                                    "name": "datasetId",
+                                    "type": "select",
+                                    "label": "Default Dataset ID",
+                                    "options": {
+                                        "store": "rpc://google-bigquery/1/listDatasets",
+                                        "nested": [
+                                            {
+                                                "help": "Specifying the **Table ID** will allow the module to generate an interface for mappable rows and improve your mapping experience.",
+                                                "name": "table",
+                                                "type": "select",
+                                                "label": "Table ID",
+                                                "options": "rpc://google-bigquery/1/listTables"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        },
+                        "datasetId": {
+                            "mode": "chose",
+                            "label": "AI4SF_DataSet"
+                        },
+                        "useQueryCache": {
+                            "mode": "chose"
+                        },
+                        "useInt64Timestamp": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google"
+                            },
+                            "label": "BigQuerry connection (david.brodsky@appsflyer.com)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:google",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "project",
+                        "type": "select",
+                        "label": "Project ID",
+                        "required": true
+                    },
+                    {
+                        "name": "query",
+                        "type": "text",
+                        "label": "Query",
+                        "required": true
+                    },
+                    {
+                        "name": "prefix",
+                        "type": "select",
+                        "label": "Query Prefix",
+                        "validate": {
+                            "enum": [
+                                "#standardSQL",
+                                "#legacySQL"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "timeoutMs",
+                        "type": "uinteger",
+                        "label": "Timeout (in Milliseconds)"
+                    },
+                    {
+                        "name": "dryRun",
+                        "type": "boolean",
+                        "label": "Dry Run"
+                    },
+                    {
+                        "name": "useQueryCache",
+                        "type": "boolean",
+                        "label": "Use Query Cache"
+                    },
+                    {
+                        "name": "useInt64Timestamp",
+                        "type": "boolean",
+                        "label": "Use Int64 Timestamp"
+                    },
+                    {
+                        "name": "maximumBytesBilled",
+                        "type": "text",
+                        "label": "Maximum Bytes Billed",
+                        "validate": {
+                            "pattern": "^\\d*$"
+                        }
+                    },
+                    {
+                        "name": "datasetId",
+                        "type": "select",
+                        "label": "Default Dataset ID"
+                    },
+                    {
+                        "name": "table",
+                        "type": "select",
+                        "label": "Table ID"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "kind",
+                        "type": "text",
+                        "label": "Kind"
+                    },
+                    {
+                        "name": "schema",
+                        "spec": [
+                            {
+                                "name": "fields",
+                                "spec": [
+                                    {
+                                        "name": "name",
+                                        "type": "text",
+                                        "label": "Name"
+                                    },
+                                    {
+                                        "name": "type",
+                                        "type": "text",
+                                        "label": "Type"
+                                    },
+                                    {
+                                        "name": "mode",
+                                        "type": "text",
+                                        "label": "Mode"
+                                    }
+                                ],
+                                "type": "array",
+                                "label": "Fields"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Schema"
+                    },
+                    {
+                        "name": "jobReference",
+                        "spec": [
+                            {
+                                "name": "projectId",
+                                "type": "text",
+                                "label": "Project ID"
+                            },
+                            {
+                                "name": "jobId",
+                                "type": "text",
+                                "label": "Job ID"
+                            },
+                            {
+                                "name": "location",
+                                "type": "text",
+                                "label": "Location"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Job Reference"
+                    },
+                    {
+                        "name": "totalRows",
+                        "type": "uinteger",
+                        "label": "Total Rows"
+                    },
+                    {
+                        "name": "rows",
+                        "spec": [
+                            {
+                                "name": "f",
+                                "spec": [
+                                    {
+                                        "name": "v",
+                                        "type": "text",
+                                        "label": "Value"
+                                    }
+                                ],
+                                "type": "array",
+                                "label": "Fields"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Rows"
+                    },
+                    {
+                        "name": "totalBytesProcessed",
+                        "type": "uinteger",
+                        "label": "Total Bytes Processed"
+                    },
+                    {
+                        "name": "jobComplete",
+                        "type": "boolean",
+                        "label": "Job Complete"
+                    },
+                    {
+                        "name": "cacheHit",
+                        "type": "boolean",
+                        "label": "Cache Hit"
+                    },
+                    {
+                        "name": "mappableRows",
+                        "spec": [
+                            {
+                                "name": "Full XML",
+                                "type": "text"
+                            },
+                            {
+                                "name": "Object",
+                                "type": "text"
+                            },
+                            {
+                                "name": "active",
+                                "type": "text"
+                            },
+                            {
+                                "name": "allowRecall",
+                                "type": "text"
+                            },
+                            {
+                                "name": "allowedSubmitters",
+                                "type": "text"
+                            },
+                            {
+                                "name": "approvalPageFields",
+                                "type": "text"
+                            },
+                            {
+                                "name": "approvalStep",
+                                "type": "text"
+                            },
+                            {
+                                "name": "approvalStep_approvalActions",
+                                "type": "text"
+                            },
+                            {
+                                "name": "approvalStep_assignedApprover",
+                                "type": "text"
+                            },
+                            {
+                                "name": "approvalStep_entryCriteria",
+                                "type": "text"
+                            },
+                            {
+                                "name": "approvalStep_entryCriteria_criteriaItems",
+                                "type": "text"
+                            },
+                            {
+                                "name": "enableMobileDeviceAccess",
+                                "type": "text"
+                            },
+                            {
+                                "name": "entryCriteria",
+                                "type": "text"
+                            },
+                            {
+                                "name": "entryCriteria_criteriaItems",
+                                "type": "text"
+                            },
+                            {
+                                "name": "finalApprovalActions",
+                                "type": "text"
+                            },
+                            {
+                                "name": "finalApprovalRecordLock",
+                                "type": "text"
+                            },
+                            {
+                                "name": "finalRejectionActions",
+                                "type": "text"
+                            },
+                            {
+                                "name": "finalRejectionRecordLock",
+                                "type": "text"
+                            },
+                            {
+                                "name": "initialSubmissionActions",
+                                "type": "text"
+                            },
+                            {
+                                "name": "label",
+                                "type": "text"
+                            },
+                            {
+                                "name": "processOrder",
+                                "type": "text"
+                            },
+                            {
+                                "name": "recallActions",
+                                "type": "text"
+                            },
+                            {
+                                "name": "recordEditability",
+                                "type": "text"
+                            },
+                            {
+                                "name": "showApprovalHistory",
+                                "type": "text"
+                            },
+                            {
+                                "name": "listOfFields",
+                                "type": "text"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Mappable Rows"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 4,
+            "module": "scenario-service:ReturnData",
+            "version": 2,
+            "parameters": {},
+            "mapper": {
+                "queryResult": "{{3.mappableRows}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 577,
+                    "y": -38
+                },
+                "restore": {},
+                "expect": [
+                    {
+                        "name": "queryResult",
+                        "type": "text",
+                        "label": ""
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "instant": false,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu1.make.celonis.com",
+        "notes": []
+    },
+    "io": {
+        "input_spec": [
+            {
+                "help": "SOQL Query that will run on BigQuery",
+                "name": "SOQLQuery",
+                "type": "text",
+                "label": "",
+                "default": "",
+                "required": false,
+                "multiline": false
+            }
+        ],
+        "output_spec": [
+            {
+                "help": "",
+                "name": "queryResult",
+                "type": "text",
+                "label": "",
+                "default": "",
+                "required": false,
+                "multiline": false
+            }
+        ]
+    }
+}
