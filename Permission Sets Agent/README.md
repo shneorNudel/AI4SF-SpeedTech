@@ -1,95 +1,125 @@
-# ⚠️ Important
-
-> This bot **does not include assignments**.
-
-To activate this project you need to follow 3 steps:
 
 ---
 
-## 1. **Build a BigQuery**
+#  AI4SF-Permissin Sets Agent
 
-### 1.1 Create BigQuery Project
 
-1. Create a BigQuery
-2. Create a project
-3. Create a dataset
 
-### 1.2 Upload the Tables
-
-#### 1.2.1 Create `permissionSets` table
-
-* Go to `./schema.json`
-* Copy all the JSON
-* In BigQuery, click on your dataset and select: **Create table**
-
-**Fill the rows:**
-
-* **Table**: name of the table (`permissionSets`)
-* **Schema**: click on "Edit as text"
-* Paste the JSON
-* Click **Create Table**
-
-#### 1.2.2 Create `permissionSetTags` table
-
-* In BigQuery, click on your dataset and select: **Create table**
-
-**Fill the rows:**
-
-* **Create table from**: Upload
-* **Select file**: select the file `./permissionSetTags`
-* **File format**: Avro
-* **Table**: name of the table (`permissionSetTags`)
-* Click **Create Table**
 
 ---
 
-## 2. **Make**
+##  Overview
 
-### 2.1 Sign up
+To get this project up and running, complete the following **3 steps**:
 
-* Sign up to [Make](https://www.make.com/en/pricing) and select the **Enterprise** plan (only this plan supports AI Agent)
+1.  Set up your BigQuery environment
+2.  Build automation scenarios with [Make](https://www.make.com/)
+3.  Deploy and connect your AI Agent
 
-### 2.2 Build Automation Scenario
-
-1. In Scenarios, click: **Create a new scenario**
-2. At the bottom, click on **More** and then **Import Blueprint**
-3. Import the file: `./automation.json`
-4. In the first module, click on the clock and change it to **On Demand**
-5. In Module 1 and Module 3, enter the URL and token to your Git (where the XML files are located)
-6. In the BigQuery module, connect your BigQuery account
-7. Select your project, dataset, and table
-8. Click **Save** and **Run**
-
-### 2.3 Build BigQuery Tool Scenario
-
-1. In Scenarios, click: **Create a new scenario**
-2. At the bottom, click on **More** and then **Import Blueprint**
-3. Import the file: `./bigQuery_tool.json`
-4. In the first module, click on the clock and change it to **On Demand**
-5. In the BigQuery module, connect your BigQuery account
-6. Select your project, dataset, and table
-7. Click **Save**
+Let’s go!
 
 ---
 
-## 3. **Run the AI Agent**
+##  Step 1: Set Up BigQuery
 
-### 3.1 Create Agent
+###  1.1 Create a BigQuery Project
 
-1. In the sidebar on Make, select **AI Agents** and click **Create Agent**
-2. Create an OpenAI connection
-3. **Model**: GPT-4o mini (or your preferred model)
-4. Go to the file `./prompt` and copy the entire prompt
-5. Paste the prompt into the **System Prompt**
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new BigQuery **project**
+3. Inside the project, create a **dataset**
 
-### 3.2 Connect BigQuery Tool
+---
 
-1. In the UI, go to **System Tools** and click **Add**
-2. Choose the **bigQuery\_tool** scenario and give it a description
+###  1.2 Upload the Required Tables
 
-### 3.3 Update Project Path
+#### 🔹 Create `permissionSets` Table
 
-In the system prompt you will see this line:
+1. Open the file `./schema.json`
+2. Copy the entire JSON content
+3. In BigQuery:
+
+   * Click on your dataset → **Create table**
+   * **Table name**: `permissionSets`
+   * Under **Schema**, click **Edit as text**
+   * Paste the JSON
+   * Click **Create Table**
+
+---
+
+####  Create `permissionSetTags` Table
+
+1. Again, click on **Create table**
+2. Fill in the fields:
+
+   * **Create table from**: Upload
+   * **File**: Select `./permissionSetTags`
+   * **File format**: Avro
+   * **Table name**: `permissionSetTags`
+   * Click **Create Table**
+
+---
+
+##  Step 2: Automate with Make
+
+###  2.1 Sign Up for Make
+
+* Register at [Make.com](https://www.make.com/en/pricing)
+* Select the **Enterprise** plan (required for AI Agents)
+
+---
+
+###  2.2 Create Main Automation Scenario
+
+1. Go to **Scenarios** → **Create a new scenario**
+2. Click **More → Import Blueprint**
+3. Import `./automation.json`
+4. In the first module, click the clock icon and change to **On Demand**
+5. In Module 1 and 3, input:
+
+   * The URL to your Git repo (where XMLs are stored)
+   * Your access token
+6. In the BigQuery module:
+
+   * Connect your BigQuery account
+   * Choose the correct project, dataset, and table
+7. Click **Save** and **Run**
+
+---
+
+###  2.3 Create BigQuery Tool Scenario
+
+1. Repeat the process to create a new scenario
+2. Import `./bigQuery_tool.json`
+3. Change the clock to **On Demand**
+4. Connect your BigQuery account
+5. Select the relevant project, dataset, and table
+6. Click **Save**
+
+---
+
+##  Step 3: Deploy the AI Agent
+
+###  3.1 Create the Agent
+
+1. In Make, go to **AI Agents** → **Create Agent**
+2. Set up a connection with your **OpenAI API key**
+3. Choose a model — recommended: `GPT-4o mini` (or higher)
+4. Open the file `./prompt` and copy the full content
+5. Paste it into the **System Prompt** field
+
+---
+
+###  3.2 Link to BigQuery Scenario
+
+1. Go to the **System Tools** tab → click **Add**
+2. Select the `bigQuery_tool` scenario
+3. Give it a descriptive name
+
+---
+
+###  3.3 Update the Prompt Path
+
+In the System Prompt you’ll see:
 
 ```text
 your-project-name.your-DataSet.permissionSets
@@ -97,11 +127,21 @@ your-project-name.your-DataSet.permissionSets
 
 Replace:
 
-* `your-project-name` with the name of your project
-* `your-DataSet` with the name of your dataset
+* `your-project-name` → with your actual BigQuery project ID
+* `your-DataSet` → with your actual dataset name
 
 ---
 
-🎉 **Now you can ask the agent anything. Enjoy!**
+##  That’s it!
+
+Your agent is now ready to answer questions about Salesforce Permission Sets using real-time data from BigQuery.
+
+You can now:
+
+* Ask about specific permission sets
+* Query tag definitions
+* Retrieve full XML when needed
+
+Enjoy building with AI! 🤖✨
 
 ---
