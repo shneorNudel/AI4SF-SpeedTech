@@ -2329,7 +2329,7 @@
                                                                     "CustomField_externalId": "{{111.CustomField.externalId}}",
                                                                     "CustomField_valueSet_valueSetDefinition": "{{111.CustomField.valueSet[].valueSetDefinition}}"
                                                                 },
-                                                                "table": "<insert your custom metadata type's custom fields table ID",
+                                                                "table": "<insert Your CMDT custom fields table ID",
                                                                 "select": "list",
                                                                 "dataset": "<Insert your dataset ID",
                                                                 "project": "<Insert your project ID"
@@ -2342,7 +2342,7 @@
                                                                 "restore": {
                                                                     "expect": {
                                                                         "table": {
-                                                                            "label": "<Choose your custom metadata type's custom fields table ID"
+                                                                            "label": "<Choose your CMDT custom fields table ID"
                                                                         },
                                                                         "select": {
                                                                             "label": "Select from the list"
@@ -2360,7 +2360,7 @@
                                                                                 "scoped": "true",
                                                                                 "connection": "google"
                                                                             },
-                                                                            "label": "<connect your bigQuery account"
+                                                                            "label": "connect your bigquery account (example@email.com)"
                                                                         }
                                                                     }
                                                                 },

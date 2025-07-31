@@ -673,16 +673,16 @@
                 "restore": {
                     "expect": {
                         "table": {
-                            "label": "Choose your global value set table"
+                            "label": "Choose your global value set table ID"
                         },
                         "select": {
                             "label": "Select from the list"
                         },
                         "dataset": {
-                            "label": "Choose your database"
+                            "label": "Choose your database ID"
                         },
                         "project": {
-                            "label": "Choose your projec"
+                            "label": "Choose your projec ID"
                         }
                     },
                     "parameters": {
@@ -691,7 +691,7 @@
                                 "scoped": "true",
                                 "connection": "google"
                             },
-                            "label": "connect your account here"
+                            "label": "connect your bigquery account (example@email.com)"
                         }
                     }
                 },
