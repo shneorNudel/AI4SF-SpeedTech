@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Full XML",
+    "mode": "NULLABLE",
+    "type": "STRING",
+    "description": "The full XML of a Global Picklist Value Set.\n\nIncludes tags:\nsorted - Required. Indicates whether a global value set is sorted in alphabetical order. By default this value is false.\ndescription - It’s useful to state the global value set’s purpose and which objects it’s intended for. Limit: 255 characters.",
+    "fields": []
+  },
+  {
+    "name": "GlobalValueSet_masterLabel",
+    "mode": "NULLABLE",
+    "type": "STRING",
+    "description": "Required. A global value set’s name, which is defined when the global value set is created. Appears as Label in the user interface.",
+    "fields": []
+  },
+  {
+    "name": "GlobalValueSet_customValue",
+    "mode": "NULLABLE",
+    "type": "STRING",
+    "description": "Requires at least one value. The list of values, or “global value set,” that’s defined for a global picklist. The global value set is inherited by any custom picklist field that uses that value set. Each value is of type customValue. A global value set can have up to 1,000 total values, including inactive values.\nIncludes tags:\nfullName - the fullname of a value in a picklist, extending the Metadata metadata type and inherits its fullName field.\ndefault - Required. Indicates whether this value is the default selection for the global picklist and the custom picklists that share its picklist value set. This field is set to true by default.\nlabel - The value’s display label. If you don’t specify the label when creating a value it defaults to the API name. Available in API version 39.0 and later.\nisActive - Indicates whether this value is active or inactive. The default value is true.",
+    "fields": []
+  }
+]

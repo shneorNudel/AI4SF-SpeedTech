@@ -1,10 +1,5 @@
-# ⚠️ Important
-
-> This bot **does not include assignments**.
 
 To activate this project you need to follow 3 steps:
-
----
 
 # 1. Build a BigQuery
 
