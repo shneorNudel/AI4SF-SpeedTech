@@ -1,0 +1,1052 @@
+{
+    "name": "AI4SF - PermissionSet",
+    "flow": [
+        {
+            "id": 1,
+            "module": "http:ActionSendData",
+            "version": 3,
+            "parameters": {
+                "handleErrors": true,
+                "useNewZLibDeCompress": true
+            },
+            "mapper": {
+                "ca": "",
+                "qs": [],
+                "url": "https://api.github.com/repos/...YOUR_REPO..../contents/{{2.path}}?ref=main",
+                "gzip": true,
+                "method": "get",
+                "headers": [
+                    {
+                        "name": "Authorization",
+                        "value": "Bearer.......Your github token"
+                    },
+                    {
+                        "name": "Accept",
+                        "value": "application/vnd.github.v3+json"
+                    }
+                ],
+                "timeout": "",
+                "useMtls": false,
+                "authPass": "",
+                "authUser": "",
+                "bodyType": "",
+                "serializeUrl": false,
+                "shareCookies": false,
+                "parseResponse": true,
+                "followRedirect": true,
+                "useQuerystring": false,
+                "followAllRedirects": false,
+                "rejectUnauthorized": true
+            },
+            "metadata": {
+                "designer": {
+                    "x": -437,
+                    "y": -5,
+                    "name": "Retrieve Metadata from GitHub"
+                },
+                "restore": {
+                    "expect": {
+                        "qs": {
+                            "mode": "chose"
+                        },
+                        "method": {
+                            "mode": "chose",
+                            "label": "GET"
+                        },
+                        "headers": {
+                            "mode": "chose",
+                            "items": [
+                                null,
+                                null
+                            ]
+                        },
+                        "bodyType": {
+                            "label": "Empty"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "handleErrors",
+                        "type": "boolean",
+                        "label": "Evaluate all states as errors (except for 2xx and 3xx )",
+                        "required": true
+                    },
+                    {
+                        "name": "useNewZLibDeCompress",
+                        "type": "hidden"
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "url",
+                        "type": "url",
+                        "label": "URL",
+                        "required": true
+                    },
+                    {
+                        "name": "serializeUrl",
+                        "type": "boolean",
+                        "label": "Serialize URL",
+                        "required": true
+                    },
+                    {
+                        "name": "method",
+                        "type": "select",
+                        "label": "Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "get",
+                                "head",
+                                "post",
+                                "put",
+                                "patch",
+                                "delete",
+                                "options"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "headers",
+                        "spec": [
+                            {
+                                "name": "name",
+                                "type": "text",
+                                "label": "Name",
+                                "required": true
+                            },
+                            {
+                                "name": "value",
+                                "type": "text",
+                                "label": "Value"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Headers"
+                    },
+                    {
+                        "name": "qs",
+                        "spec": [
+                            {
+                                "name": "name",
+                                "type": "text",
+                                "label": "Name",
+                                "required": true
+                            },
+                            {
+                                "name": "value",
+                                "type": "text",
+                                "label": "Value"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Query String"
+                    },
+                    {
+                        "name": "bodyType",
+                        "type": "select",
+                        "label": "Body type",
+                        "validate": {
+                            "enum": [
+                                "raw",
+                                "x_www_form_urlencoded",
+                                "multipart_form_data"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "parseResponse",
+                        "type": "boolean",
+                        "label": "Parse response",
+                        "required": true
+                    },
+                    {
+                        "name": "authUser",
+                        "type": "text",
+                        "label": "User name"
+                    },
+                    {
+                        "name": "authPass",
+                        "type": "password",
+                        "label": "Password"
+                    },
+                    {
+                        "name": "timeout",
+                        "type": "uinteger",
+                        "label": "Timeout",
+                        "validate": {
+                            "max": 300,
+                            "min": 1
+                        }
+                    },
+                    {
+                        "name": "shareCookies",
+                        "type": "boolean",
+                        "label": "Share cookies with other HTTP modules",
+                        "required": true
+                    },
+                    {
+                        "name": "ca",
+                        "type": "cert",
+                        "label": "Self-signed certificate"
+                    },
+                    {
+                        "name": "rejectUnauthorized",
+                        "type": "boolean",
+                        "label": "Reject connections that are using unverified (self-signed) certificates",
+                        "required": true
+                    },
+                    {
+                        "name": "followRedirect",
+                        "type": "boolean",
+                        "label": "Follow redirect",
+                        "required": true
+                    },
+                    {
+                        "name": "useQuerystring",
+                        "type": "boolean",
+                        "label": "Disable serialization of multiple same query string keys as arrays",
+                        "required": true
+                    },
+                    {
+                        "name": "gzip",
+                        "type": "boolean",
+                        "label": "Request compressed content",
+                        "required": true
+                    },
+                    {
+                        "name": "useMtls",
+                        "type": "boolean",
+                        "label": "Use Mutual TLS",
+                        "required": true
+                    },
+                    {
+                        "name": "followAllRedirects",
+                        "type": "boolean",
+                        "label": "Follow all redirect",
+                        "required": true
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "headers",
+                        "spec": [
+                            {
+                                "name": "name",
+                                "type": "text",
+                                "label": "Name"
+                            },
+                            {
+                                "name": "value",
+                                "type": "text",
+                                "label": "Value"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Headers"
+                    },
+                    {
+                        "name": "cookieHeaders",
+                        "type": "array",
+                        "label": "Cookie headers"
+                    },
+                    {
+                        "name": "statusCode",
+                        "type": "number",
+                        "label": "Status code"
+                    },
+                    {
+                        "name": "data",
+                        "type": "any",
+                        "label": "Data"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 2,
+            "module": "builtin:BasicFeeder",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "array": "{{1.data}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": -134,
+                    "y": -3
+                },
+                "restore": {
+                    "expect": {
+                        "array": {
+                            "mode": "edit"
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "mode": "edit",
+                        "name": "array",
+                        "spec": [],
+                        "type": "array",
+                        "label": "Array"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 3,
+            "module": "http:ActionSendData",
+            "version": 3,
+            "parameters": {
+                "handleErrors": true,
+                "useNewZLibDeCompress": true
+            },
+            "filter": {
+                "name": "pass only 3",
+                "conditions": []
+            },
+            "mapper": {
+                "ca": "",
+                "qs": [],
+                "url": "https://api.github.com/repos/...YOUR_REPO..../",
+                "gzip": true,
+                "method": "get",
+                "headers": [
+                    {
+                        "name": "Authorization",
+                        "value": "Bearer .......Your github token"
+                    },
+                    {
+                        "name": "Accept",
+                        "value": "application/vnd.github.v3+json"
+                    }
+                ],
+                "timeout": "",
+                "useMtls": false,
+                "authPass": "",
+                "authUser": "",
+                "bodyType": "",
+                "serializeUrl": false,
+                "shareCookies": false,
+                "parseResponse": true,
+                "followRedirect": true,
+                "useQuerystring": false,
+                "followAllRedirects": false,
+                "rejectUnauthorized": true
+            },
+            "metadata": {
+                "designer": {
+                    "x": 228,
+                    "y": -2,
+                    "name": "Retrieve Metadata from GitHub Level 5"
+                },
+                "restore": {
+                    "expect": {
+                        "qs": {
+                            "mode": "chose"
+                        },
+                        "method": {
+                            "mode": "chose",
+                            "label": "GET"
+                        },
+                        "headers": {
+                            "mode": "chose",
+                            "items": [
+                                null,
+                                null
+                            ]
+                        },
+                        "bodyType": {
+                            "label": "Empty"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "handleErrors",
+                        "type": "boolean",
+                        "label": "Evaluate all states as errors (except for 2xx and 3xx )",
+                        "required": true
+                    },
+                    {
+                        "name": "useNewZLibDeCompress",
+                        "type": "hidden"
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "url",
+                        "type": "url",
+                        "label": "URL",
+                        "required": true
+                    },
+                    {
+                        "name": "serializeUrl",
+                        "type": "boolean",
+                        "label": "Serialize URL",
+                        "required": true
+                    },
+                    {
+                        "name": "method",
+                        "type": "select",
+                        "label": "Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "get",
+                                "head",
+                                "post",
+                                "put",
+                                "patch",
+                                "delete",
+                                "options"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "headers",
+                        "spec": [
+                            {
+                                "name": "name",
+                                "type": "text",
+                                "label": "Name",
+                                "required": true
+                            },
+                            {
+                                "name": "value",
+                                "type": "text",
+                                "label": "Value"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Headers"
+                    },
+                    {
+                        "name": "qs",
+                        "spec": [
+                            {
+                                "name": "name",
+                                "type": "text",
+                                "label": "Name",
+                                "required": true
+                            },
+                            {
+                                "name": "value",
+                                "type": "text",
+                                "label": "Value"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Query String"
+                    },
+                    {
+                        "name": "bodyType",
+                        "type": "select",
+                        "label": "Body type",
+                        "validate": {
+                            "enum": [
+                                "raw",
+                                "x_www_form_urlencoded",
+                                "multipart_form_data"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "parseResponse",
+                        "type": "boolean",
+                        "label": "Parse response",
+                        "required": true
+                    },
+                    {
+                        "name": "authUser",
+                        "type": "text",
+                        "label": "User name"
+                    },
+                    {
+                        "name": "authPass",
+                        "type": "password",
+                        "label": "Password"
+                    },
+                    {
+                        "name": "timeout",
+                        "type": "uinteger",
+                        "label": "Timeout",
+                        "validate": {
+                            "max": 300,
+                            "min": 1
+                        }
+                    },
+                    {
+                        "name": "shareCookies",
+                        "type": "boolean",
+                        "label": "Share cookies with other HTTP modules",
+                        "required": true
+                    },
+                    {
+                        "name": "ca",
+                        "type": "cert",
+                        "label": "Self-signed certificate"
+                    },
+                    {
+                        "name": "rejectUnauthorized",
+                        "type": "boolean",
+                        "label": "Reject connections that are using unverified (self-signed) certificates",
+                        "required": true
+                    },
+                    {
+                        "name": "followRedirect",
+                        "type": "boolean",
+                        "label": "Follow redirect",
+                        "required": true
+                    },
+                    {
+                        "name": "useQuerystring",
+                        "type": "boolean",
+                        "label": "Disable serialization of multiple same query string keys as arrays",
+                        "required": true
+                    },
+                    {
+                        "name": "gzip",
+                        "type": "boolean",
+                        "label": "Request compressed content",
+                        "required": true
+                    },
+                    {
+                        "name": "useMtls",
+                        "type": "boolean",
+                        "label": "Use Mutual TLS",
+                        "required": true
+                    },
+                    {
+                        "name": "followAllRedirects",
+                        "type": "boolean",
+                        "label": "Follow all redirect",
+                        "required": true
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "headers",
+                        "spec": [
+                            {
+                                "name": "name",
+                                "type": "text",
+                                "label": "Name"
+                            },
+                            {
+                                "name": "value",
+                                "type": "text",
+                                "label": "Value"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Headers"
+                    },
+                    {
+                        "name": "cookieHeaders",
+                        "type": "array",
+                        "label": "Cookie headers"
+                    },
+                    {
+                        "name": "statusCode",
+                        "type": "number",
+                        "label": "Status code"
+                    },
+                    {
+                        "name": "data",
+                        "type": "any",
+                        "label": "Data"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 6,
+            "module": "xml:ParseXML",
+            "version": 1,
+            "parameters": {
+                "type": "",
+                "preserveNumbersAsText": false
+            },
+            "mapper": {
+                "xml": "{{trim(toString(toBinary(3.data.content; \"base64\")))}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 547,
+                    "y": 7
+                },
+                "restore": {
+                    "parameters": {
+                        "type": {
+                            "label": "Choose a data structure"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "type",
+                        "type": "udt",
+                        "label": "Data structure"
+                    },
+                    {
+                        "name": "preserveNumbersAsText",
+                        "type": "boolean",
+                        "label": "Preserve numbers as text",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "xml",
+                        "type": "text",
+                        "label": "XML",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 14,
+            "module": "google-bigquery:createRow",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": 71015
+            },
+            "mapper": {
+                "row": [
+                    {
+                        "key": "Full XML",
+                        "type": "text",
+                        "value": "{{6.PermissionSet}}"
+                    },
+                    {
+                        "key": "listOfObjects",
+                        "type": "text",
+                        "value": "{{join(map(6.PermissionSet.objectPermissions; \"object\"); \";\")}}"
+                    },
+                    {
+                        "key": "listOfFields",
+                        "type": "text",
+                        "value": "{{join(map(6.PermissionSet.fieldPermissions; \"field\"); \";\")}}"
+                    },
+                    {
+                        "key": "hasActivationRequired",
+                        "type": "text",
+                        "value": "{{6.PermissionSet.hasActivationRequired}}"
+                    },
+                    {
+                        "key": "label",
+                        "type": "text",
+                        "value": "{{6.PermissionSet.label}}"
+                    },
+                    {
+                        "key": "license",
+                        "type": "text",
+                        "value": "{{6.PermissionSet.license}}"
+                    },
+                    {
+                        "key": "applicationVisibilities",
+                        "type": "text",
+                        "value": "{{6.PermissionSet.applicationVisibilities}}"
+                    },
+                    {
+                        "key": "classAccesses",
+                        "type": "text",
+                        "value": "{{6.PermissionSet.classAccesses}}"
+                    },
+                    {
+                        "key": "customMetadataTypeAccesses",
+                        "type": "text",
+                        "value": "{{6.PermissionSet.customMetadataTypeAccesses}}"
+                    },
+                    {
+                        "key": "customPermissions",
+                        "type": "text",
+                        "value": "{{6.PermissionSet.customPermissions}}"
+                    },
+                    {
+                        "key": "customSettingAccesses",
+                        "type": "text",
+                        "value": "{{6.PermissionSet.customSettingAccesses}}"
+                    },
+                    {
+                        "key": "fieldPermissions",
+                        "type": "text",
+                        "value": "{{6.PermissionSet.fieldPermissions}}"
+                    },
+                    {
+                        "key": "objectPermissions",
+                        "type": "text",
+                        "value": "{{6.PermissionSet.objectPermissions}}"
+                    },
+                    {
+                        "key": "pageAccesses",
+                        "type": "text",
+                        "value": "{{6.PermissionSet.pageAccesses}}"
+                    },
+                    {
+                        "key": "recordTypeVisibilities",
+                        "type": "text",
+                        "value": "{{6.PermissionSet.recordTypeVisibilities}}"
+                    },
+                    {
+                        "key": "tabSettings",
+                        "type": "text",
+                        "value": "{{6.PermissionSet.tabSettings}}"
+                    },
+                    {
+                        "key": "userPermissions",
+                        "type": "text",
+                        "value": "{{6.PermissionSet.userPermissions}}"
+                    }
+                ],
+                "table": "permissionsets",
+                "select": "map",
+                "dataset": "AI4SF_DataSet",
+                "project": "speedtech-project"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 878,
+                    "y": 6
+                },
+                "restore": {
+                    "expect": {
+                        "row": {
+                            "mode": "chose",
+                            "items": [
+                                {
+                                    "type": {
+                                        "mode": "chose",
+                                        "label": "Text"
+                                    }
+                                },
+                                {
+                                    "type": {
+                                        "mode": "chose",
+                                        "label": "Text"
+                                    }
+                                },
+                                {
+                                    "type": {
+                                        "mode": "chose",
+                                        "label": "Text"
+                                    }
+                                },
+                                {
+                                    "type": {
+                                        "mode": "chose",
+                                        "label": "Text"
+                                    }
+                                },
+                                {
+                                    "type": {
+                                        "mode": "chose",
+                                        "label": "Text"
+                                    }
+                                },
+                                {
+                                    "type": {
+                                        "mode": "chose",
+                                        "label": "Text"
+                                    }
+                                },
+                                {
+                                    "type": {
+                                        "mode": "chose",
+                                        "label": "Text"
+                                    }
+                                },
+                                {
+                                    "type": {
+                                        "mode": "chose",
+                                        "label": "Text"
+                                    }
+                                },
+                                {
+                                    "type": {
+                                        "mode": "chose",
+                                        "label": "Text"
+                                    }
+                                },
+                                {
+                                    "type": {
+                                        "mode": "chose",
+                                        "label": "Text"
+                                    }
+                                },
+                                {
+                                    "type": {
+                                        "mode": "chose",
+                                        "label": "Text"
+                                    }
+                                },
+                                {
+                                    "type": {
+                                        "mode": "chose",
+                                        "label": "Text"
+                                    }
+                                },
+                                {
+                                    "type": {
+                                        "mode": "chose",
+                                        "label": "Text"
+                                    }
+                                },
+                                {
+                                    "type": {
+                                        "mode": "chose",
+                                        "label": "Text"
+                                    }
+                                },
+                                {
+                                    "type": {
+                                        "mode": "chose",
+                                        "label": "Text"
+                                    }
+                                },
+                                {
+                                    "type": {
+                                        "mode": "chose",
+                                        "label": "Text"
+                                    }
+                                },
+                                {
+                                    "type": {
+                                        "mode": "chose",
+                                        "label": "Text"
+                                    }
+                                }
+                            ]
+                        },
+                        "select": {
+                            "label": "Enter manually"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google"
+                            },
+                            "label": "Your Google connection (example@organization.com)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:google",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "select",
+                        "type": "select",
+                        "label": "Choose a Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "map",
+                                "list"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "project",
+                        "type": "text",
+                        "label": "Project ID",
+                        "required": true
+                    },
+                    {
+                        "name": "dataset",
+                        "type": "text",
+                        "label": "Dataset ID",
+                        "required": true
+                    },
+                    {
+                        "name": "table",
+                        "type": "text",
+                        "label": "Table ID",
+                        "required": true
+                    },
+                    {
+                        "name": "row",
+                        "spec": [
+                            {
+                                "name": "key",
+                                "type": "text",
+                                "label": "Key"
+                            },
+                            {
+                                "name": "type",
+                                "type": "select",
+                                "label": "Type",
+                                "options": [
+                                    {
+                                        "label": "Text",
+                                        "value": "text",
+                                        "nested": [
+                                            {
+                                                "name": "value",
+                                                "type": "text",
+                                                "label": "Value"
+                                            }
+                                        ],
+                                        "default": true
+                                    },
+                                    {
+                                        "label": "Number",
+                                        "value": "number",
+                                        "nested": [
+                                            {
+                                                "name": "value",
+                                                "type": "number",
+                                                "label": "Value"
+                                            }
+                                        ],
+                                        "default": true
+                                    },
+                                    {
+                                        "label": "Boolean",
+                                        "value": "boolean",
+                                        "nested": [
+                                            {
+                                                "name": "value",
+                                                "type": "boolean",
+                                                "label": "Value"
+                                            }
+                                        ],
+                                        "default": true
+                                    },
+                                    {
+                                        "label": "Date",
+                                        "value": "date",
+                                        "nested": [
+                                            {
+                                                "help": "YYYY-MM-DD \ne.g. `2019-09-02`",
+                                                "name": "value",
+                                                "type": "text",
+                                                "label": "Value"
+                                            }
+                                        ],
+                                        "default": true
+                                    },
+                                    {
+                                        "label": "Time",
+                                        "value": "time",
+                                        "nested": [
+                                            {
+                                                "help": "HH:mm:ss \ne.g. `15:30:45`",
+                                                "name": "value",
+                                                "type": "time",
+                                                "label": "Value"
+                                            }
+                                        ],
+                                        "default": true
+                                    },
+                                    {
+                                        "label": "Date & Time",
+                                        "value": "datetime",
+                                        "nested": [
+                                            {
+                                                "help": "YYYY-MM-DD HH:mm:ss \ne.g. `2019-09-02 15:30:45`",
+                                                "name": "value",
+                                                "type": "text",
+                                                "label": "Value"
+                                            }
+                                        ],
+                                        "default": true
+                                    }
+                                ],
+                                "required": true
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Values of Row"
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "instant": false,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": [
+                [
+                    {
+                        "id": 15,
+                        "module": "builtin:BasicFeeder",
+                        "version": 1,
+                        "parameters": {},
+                        "mapper": {
+                            "array": "{{`6`}}"
+                        },
+                        "metadata": {
+                            "designer": {
+                                "x": 468,
+                                "y": -439,
+                                "messages": [
+                                    {
+                                        "category": "link",
+                                        "severity": "warning",
+                                        "message": "The module is not connected to the data flow."
+                                    },
+                                    {
+                                        "category": "last",
+                                        "severity": "warning",
+                                        "message": "A transformer should not be the last module in the route."
+                                    },
+                                    {
+                                        "category": "reference",
+                                        "severity": "warning",
+                                        "message": "Referenced module 'XML - Parse XML' [6] is not accessible."
+                                    }
+                                ]
+                            },
+                            "restore": {
+                                "expect": {
+                                    "array": {
+                                        "mode": "edit",
+                                        "items": [
+                                            null
+                                        ]
+                                    }
+                                }
+                            },
+                            "expect": [
+                                {
+                                    "mode": "edit",
+                                    "name": "array",
+                                    "spec": [],
+                                    "type": "array",
+                                    "label": "Array"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            ]
+        },
+        "zone": "eu1.make.celonis.com",
+        "notes": []
+    }
+}

@@ -1,0 +1,121 @@
+[
+  {
+    "name": "Full XML",
+    "mode": "",
+    "type": "STRING",
+    "description": "",
+    "fields": []
+  },
+  {
+    "name": "listOfObjects",
+    "mode": "",
+    "type": "STRING",
+    "description": "",
+    "fields": []
+  },
+  {
+    "name": "listOfFields",
+    "mode": "",
+    "type": "STRING",
+    "description": "",
+    "fields": []
+  },
+  {
+    "name": "hasActivationRequired",
+    "mode": "",
+    "type": "STRING",
+    "description": "",
+    "fields": []
+  },
+  {
+    "name": "label",
+    "mode": "",
+    "type": "STRING",
+    "description": "",
+    "fields": []
+  },
+  {
+    "name": "license",
+    "mode": "",
+    "type": "STRING",
+    "description": "",
+    "fields": []
+  },
+  {
+    "name": "applicationVisibilities",
+    "mode": "",
+    "type": "STRING",
+    "description": "",
+    "fields": []
+  },
+  {
+    "name": "classAccesses",
+    "mode": "",
+    "type": "STRING",
+    "description": "",
+    "fields": []
+  },
+  {
+    "name": "customMetadataTypeAccesses",
+    "mode": "",
+    "type": "STRING",
+    "description": "",
+    "fields": []
+  },
+  {
+    "name": "customPermissions",
+    "mode": "",
+    "type": "STRING",
+    "description": "",
+    "fields": []
+  },
+  {
+    "name": "customSettingAccesses",
+    "mode": "",
+    "type": "STRING",
+    "description": "",
+    "fields": []
+  },
+  {
+    "name": "fieldPermissions",
+    "mode": "",
+    "type": "STRING",
+    "description": "",
+    "fields": []
+  },
+  {
+    "name": "objectPermissions",
+    "mode": "",
+    "type": "STRING",
+    "description": "",
+    "fields": []
+  },
+  {
+    "name": "pageAccesses",
+    "mode": "",
+    "type": "STRING",
+    "description": "",
+    "fields": []
+  },
+  {
+    "name": "recordTypeVisibilities",
+    "mode": "",
+    "type": "STRING",
+    "description": "",
+    "fields": []
+  },
+  {
+    "name": "tabSettings",
+    "mode": "",
+    "type": "STRING",
+    "description": "",
+    "fields": []
+  },
+  {
+    "name": "userPermissions",
+    "mode": "",
+    "type": "STRING",
+    "description": "",
+    "fields": []
+  }
+]
