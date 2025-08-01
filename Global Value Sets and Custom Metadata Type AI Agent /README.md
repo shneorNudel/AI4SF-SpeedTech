@@ -104,6 +104,6 @@ A template will look like this:  <insert the_data_you_Should_to_fill_here>
 
 ---
 
-🎉 **Now you can ask the agent anything. Enjoy!**
+**Now you can ask the agent anything. Enjoy!**
 
 ---
