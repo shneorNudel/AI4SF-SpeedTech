@@ -62,14 +62,17 @@ To activate this project you need to follow 3 steps:
 
 1. In Scenarios, click: **Create a new scenario**
 2. At the bottom, click on **More** and then **Import Blueprint**
-3. Import the file: `./Automation CustomMetadataType.json`
+3. Import the file: `./automation CustomMetadataType.json` 
 4. In the first module, click on the clock and change it to **On Demand** 
 5. In Module 1 and Module 3, enter the URL and token to your Git (where the XML files are located - look at "explanation" above, if your files or not stored in git).
 6. In the BigQuery module, connect your BigQuery account
 7. Select your project, dataset, and table
 8. Click **Save** and **Run**
 
-**Create A New Scenerio And Repeat All The Steps For The `./Automation GlobalValueSets.json` File**
+**Create A New Scenerio And Repeat All The Steps For The `./automation GlobalValueSets.json` File**
+
+**importanrt** in the customMetadataType automation, there are more mdoules than in th GlobalValueSets one, and that is because, based on the git stracture of the CMDT objects, to be able to extract the fields, I needed to enter each object and enter it's fields folder and then filter the fields from there.
+and because the CMDT object name and full XML os stored in the CMDT fields table, I needed after that to extract the the CMDT respective object's namemof each field from the field's XML file name, and with that extracted name also to access the full xml of the respective CMDT object. which prolonged the automation - unlike the global value set automation, which didn't require an object name extraction from it's file name, or filtering it from another folder(outside of the main globalValueSet folder).
 
 ### Build BigQuery Tool Scenario
 
