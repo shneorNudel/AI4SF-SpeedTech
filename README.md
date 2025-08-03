@@ -143,7 +143,7 @@ The agent must:
 
 ## Example Directory Structure
 
-<insert Git Repositroy Directory Stracture>
+<insert Git Repositroy Directory Stracture> (optional addition)
 
 ---
 
